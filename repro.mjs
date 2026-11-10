@@ -1,7 +1,7 @@
 // Repro: tool_choice "required" is not enforced when openrouter:web_search runs.
 // No dependencies. Node 18+ (global fetch).
 //
-//   OPENROUTER_API_KEY=sk-or-... node repro.mjs [maxRequests=10]
+//   OPENROUTER_API_KEY=sk-or-... node repro.mjs [maxRequests=10] [model=google/gemini-3.5-flash-lite]
 //
 // Sends requests one at a time and stops at the first response that breaks
 // tool_choice "required" (no tool_calls, plain content instead), so it usually
@@ -16,9 +16,10 @@ if (!key) {
   process.exit(1)
 }
 const maxRequests = Number(process.argv[2] ?? 10)
+const model = process.argv[3] ?? 'google/gemini-3.5-flash-lite'
 
 const request = {
-  model: 'google/gemini-3.5-flash-lite',
+  model,
   max_tokens: 3000,
   provider: { data_collection: 'deny' },
   reasoning: { effort: 'high' },
