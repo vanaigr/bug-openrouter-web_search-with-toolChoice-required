@@ -1,7 +1,7 @@
 // Repro: tool_choice "required" is not enforced when openrouter:web_search runs.
 // No dependencies. Node 18+ (global fetch).
 //
-//   OPENROUTER_API_KEY=sk-or-... node repro.mjs [rounds=10] [model=google/gemini-3.5-flash-lite]
+//   OPENROUTER_API_KEY=sk-or-... node repro.mjs [rounds=10]
 //
 // Each round sends two requests in parallel, identical apart from the tools:
 //   search:  function tools + openrouter:web_search  (expected to break)
@@ -19,7 +19,7 @@ if (!key) {
   process.exit(1)
 }
 const rounds = Number(process.argv[2] ?? 10)
-const model = process.argv[3] ?? 'google/gemini-3.5-flash-lite'
+const model = 'google/gemini-3.6-flash'
 
 const functionTools = [
   {
