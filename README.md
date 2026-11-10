@@ -21,14 +21,14 @@ Model `google/gemini-3.5-flash-lite` (provider Google), the request in `repro.mj
 
 | setup | responses without a tool call |
 |---|---|
-| `openrouter:web_search`, engine `exa` | 3 / 29 |
+| `openrouter:web_search`, engine `exa` | 4 / 34 |
 | `openrouter:web_search`, engine `parallel` | 0 / 10 |
 | no server tools, our production traffic (mostly `gemini-3.6-flash`, 19 on `gemini-3.5-flash-lite`) | 0 / 1334 |
 
 Every response that came back without a tool call had run 2–3 searches on
 OpenRouter's side (`usage.server_tool_use_details.web_search_requests`).
 
-Example failing generation: `gen-1794287986-BhlDx18UndbUQaeLDio8`
+Failing generations: `gen-1794289410-NVCCXDYj4eRQySnKeSZy` (5th request of a `repro.mjs` run), `gen-1794287986-BhlDx18UndbUQaeLDio8` (earlier, same request). Both returned:
 
 ```json
 "finish_reason": "stop",
